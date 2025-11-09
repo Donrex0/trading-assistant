@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: trading-assistant
+    env: python
+    build:
+      dockerfile: Dockerfile
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: PYTHONDONTWRITEBYTECODE
+        value: "1"
+    plan: standard
+    numInstances: 1
+    healthCheckPath: /
+    autoDeploy: true
+    resources:
+      cpu: 1
+      memory: 2GB
+      disk: 2GB
+    envVars:
+      - key: PORT
+        value: "8501"
+      - key: STREAMLIT_SERVER_PORT
+        value: "8501"
+      - key: STREAMLIT_SERVER_HEADLESS
+        value: "true"
+      - key: STREAMLIT_BROWSER_GATHER_USAGE_STATS
+        value: "false"
